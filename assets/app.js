@@ -41,6 +41,7 @@
   };
   const fmtTime = (s) => { s = Math.max(0, Math.round(s)); const m = Math.floor(s / 60), r = s % 60; return `${String(m).padStart(2, '0')}:${String(r).padStart(2, '0')}`; };
   const KEYS = ['ก', 'ข', 'ค', 'ง', 'จ'];
+  const ICONS = { 'คณิตศาสตร์': '📐', 'วิทยาศาสตร์': '🔬', 'ภาษาอังกฤษ': '🔤' };
   const go = (hash) => { if (location.hash === hash) render(); else location.hash = hash; };
 
   // ตัวเลขที่ผู้สอบพิมพ์: 0.5  1/2  1 1/2  3,000  -2
@@ -97,19 +98,26 @@
   async function pageHome() {
     const idx = await loadIndex();
     const sets = visibleSets(idx);
+    const nick = store.get('profile', { nick: '' }).nick;
     view.replaceChildren(
-      h('h1', {}, 'ข้อสอบแนวสอบเข้า ม.1'),
-      h('p', { class: 'lead' }, 'คณิตศาสตร์และวิทยาศาสตร์ จับเวลาเหมือนสนามจริง ส่งแล้วเห็นคะแนนแยกหัวข้อ พร้อมเฉลยทีละขั้นทุกข้อ'),
+      h('section', { class: 'hero' },
+        h('h1', {}, nick ? `สวัสดี ${nick} 👋` : 'ข้อสอบแนวสอบเข้า ม.1'),
+        h('p', { class: 'lead' }, 'เลือกชุดที่อยากฝึก ทำให้เหมือนวันสอบจริง แล้วดูว่าหัวข้อไหนควรทบทวน'),
+        h('ul', { class: 'feats' }, h('li', {}, '⏱️ จับเวลาเหมือนจริง'), h('li', {}, '📊 รู้จุดที่ต้องทบทวน'), h('li', {}, '💡 เฉลยทีละขั้น'))),
       ...idx.schools.map((sc) => {
         const list = sets.filter((s) => s.school === sc.id);
         return h('section', { class: 'school' },
           h('h2', {}, 'แนว' + sc.name),
           list.length ? h('div', { class: 'grid two' }, list.map((s) => {
             const tries = store.get('attempts:' + s.id, []);
+            const last = tries[tries.length - 1];
             return h('a', { class: 'card set', href: '#/start/' + s.id },
+              h('span', { class: 'ico', 'aria-hidden': 'true' }, ICONS[s.subject] || '📝'),
               h('strong', {}, `${s.subject} · ${s.title}`),
               h('span', { class: 'meta' }, `${s.questions} ข้อ · ${s.minutes} นาที`),
-              h('span', {}, !s.reviewed ? h('span', { class: 'tag warn' }, 'ยังไม่ผ่านการตรวจ') : null, tries.length ? h('span', { class: 'tag' }, `ทำแล้ว ${tries.length} ครั้ง · ล่าสุด ${tries[tries.length - 1].score}/${tries[tries.length - 1].total}`) : null));
+              h('span', { class: 'tags' }, !s.reviewed ? h('span', { class: 'tag warn' }, 'ยังไม่ผ่านการตรวจ') : null,
+                last ? h('span', { class: 'tag good' }, `ทำแล้ว ${tries.length} ครั้ง · ล่าสุด ${last.score}/${last.total}`) : null),
+              h('span', { class: 'go', 'aria-hidden': 'true' }, '›'));
           })) : h('p', { class: 'muted' }, 'กำลังเตรียมข้อสอบ เร็วๆ นี้'));
       }),
     );
@@ -140,11 +148,11 @@
     view.replaceChildren(
       h('p', { class: 'muted' }, 'แนว' + set.schoolName),
       h('h1', {}, `${set.subject} · ${set.title}`),
-      h('ul', { class: 'card stack', style: 'list-style:none' },
-        h('li', {}, `📝 ${set.questions.length} ข้อ · ⏱️ ${set.minutes} นาที`),
-        h('li', {}, 'ระหว่างทำจะไม่บอกว่าถูกหรือผิด เหมือนสนามสอบจริง'),
-        h('li', {}, 'หมดเวลาแล้วระบบจะส่งให้อัตโนมัติ ปิดหน้าไปก่อนก็กลับมาทำต่อได้ แต่เวลายังเดินอยู่'),
-        h('li', {}, 'ส่งแล้วจะเห็นคะแนน คะแนนแยกหัวข้อ และเฉลยทีละขั้นทุกข้อ')),
+      h('ul', { class: 'card rules' },
+        h('li', {}, h('span', { 'aria-hidden': 'true' }, '📝'), h('span', {}, `${set.questions.length} ข้อ · ${set.minutes} นาที`)),
+        h('li', {}, h('span', { 'aria-hidden': 'true' }, '🤫'), h('span', {}, 'ระหว่างทำจะไม่บอกว่าถูกหรือผิด เหมือนสนามสอบจริง')),
+        h('li', {}, h('span', { 'aria-hidden': 'true' }, '⏱️'), h('span', {}, 'หมดเวลาแล้วส่งให้อัตโนมัติ ปิดหน้าไปก่อนก็กลับมาทำต่อได้ แต่เวลายังเดินอยู่')),
+        h('li', {}, h('span', { 'aria-hidden': 'true' }, '💡'), h('span', {}, 'ส่งแล้วเห็นคะแนน คะแนนแยกหัวข้อ และเฉลยทีละขั้นทุกข้อ'))),
       set.note ? h('p', { class: 'note' }, set.note) : null,
       h('div', { style: 'margin-top:16px' }, form),
     );
@@ -160,7 +168,8 @@
     const save = () => store.set('active:' + id, st);
     const timer = h('span', { class: 'timer', role: 'timer', 'aria-live': 'off' });
     const prog = h('span', { class: 'progress' });
-    const qbox = h('div', { class: 'q' });
+    const progFill = h('i', { style: 'width:0%' });
+    const qbox = h('div', { class: 'card qcard' });
     const dots = h('nav', { class: 'dots', 'aria-label': 'ไปที่ข้อ' });
 
     const answeredCount = () => Q.filter((q) => st.answers[q.id] != null && st.answers[q.id] !== '').length;
@@ -169,6 +178,7 @@
         'aria-label': `ข้อ ${i + 1}${st.answers[q.id] != null && st.answers[q.id] !== '' ? ' ตอบแล้ว' : ''}${st.flags[q.id] ? ' ทำเครื่องหมายไว้' : ''}`, 'aria-current': i === st.cur ? 'step' : null,
         onclick: () => { st.cur = i; save(); drawQ(); } }, i + 1)));
       prog.textContent = `ตอบแล้ว ${answeredCount()}/${Q.length}`;
+      progFill.style.width = `${Math.round((answeredCount() / Q.length) * 100)}%`;
     }
     function drawQ() {
       const q = Q[st.cur];
@@ -227,8 +237,10 @@
       if (left <= 0) submit(true);
     };
     view.replaceChildren(
-      h('div', { class: 'examhead' }, h('div', {}, h('strong', {}, `${set.subject} · ${set.title}`), h('br'), prog), timer),
-      qbox, dots,
+      h('div', { class: 'examhead' },
+        h('div', { class: 'row' }, h('div', {}, h('div', { class: 'ttl' }, `${set.subject} · ${set.title}`), prog), timer),
+        h('div', { class: 'prog-line', role: 'presentation' }, progFill)),
+      qbox, h('p', { class: 'dots-title' }, 'ไปที่ข้อ (สีฟ้า = ตอบแล้ว · ขอบส้ม = กลับมาดูอีกที)'), dots,
       h('p', { style: 'margin-top:20px' }, h('button', { type: 'button', class: 'btn block', onclick: () => submit(false) }, 'ส่งข้อสอบ')),
     );
     drawQ(); tick(); clearInterval(ticker); ticker = setInterval(tick, 500);
@@ -267,15 +279,21 @@
       h('p', { class: 'muted' }, `แนว${set.schoolName} · ${set.subject} · ${set.title} · ครั้งที่ ${att.n}`),
       h('h1', {}, att.auto ? 'หมดเวลา ส่งให้อัตโนมัติแล้ว' : 'ส่งข้อสอบแล้ว'),
       h('div', { class: 'card stack' },
-        h('p', { class: 'score' }, `${att.score}/${att.total}`),
-        h('div', { class: 'bar', role: 'img', 'aria-label': `ได้ ${pct}%` }, h('i', { style: `width:${pct}%` })),
-        h('p', { class: 'muted' }, `${pct}% · ใช้เวลา ${fmtTime(att.secs)} จาก ${set.minutes} นาที`),
+        h('div', { class: 'scorecard' },
+          h('div', { class: 'ring', role: 'img', 'aria-label': `ได้ ${att.score} จาก ${att.total} คะแนน (${pct}%)`, style: `--p:${pct};--ring:${pct >= 70 ? '#3FA66A' : pct >= 40 ? '#E0A43A' : '#E58A62'}` },
+            h('span', {}, `${att.score}/${att.total}`, h('small', {}, `${pct}%`))),
+          h('div', {},
+            h('p', { class: 'cheer' }, pct >= 80 ? 'เยี่ยมมาก! พร้อมสนามจริงแล้ว 🎉' : pct >= 60 ? 'ทำได้ดี อีกนิดเดียว 💪' : pct >= 40 ? 'มาถูกทางแล้ว ทบทวนหัวข้อด้านล่างนะ' : 'ไม่เป็นไร ค่อยๆ ดูเฉลยแล้วลองใหม่ 🙂'),
+            h('p', { class: 'muted' }, `ใช้เวลา ${fmtTime(att.secs)} จาก ${set.minutes} นาที`))),
         sendNote),
       h('h2', {}, 'คะแนนแยกหัวข้อ'),
       h('p', { class: 'muted' }, 'เรียงจากหัวข้อที่ควรทบทวนก่อน'),
-      h('div', { class: 'card stack' }, topics.map(([name, t]) => h('div', { class: 'topic' },
-        h('span', {}, name), h('span', { class: 'muted' }, `${t.right}/${t.total}`),
-        h('div', { class: 'bar' }, h('i', { style: `width:${Math.round((t.right / t.total) * 100)}%` }))))),
+      h('div', { class: 'card stack' }, topics.map(([name, t]) => {
+        const tp = Math.round((t.right / t.total) * 100);
+        return h('div', { class: 'topic' },
+          h('span', {}, name), h('span', { class: 'muted' }, `${t.right}/${t.total}`),
+          h('div', { class: 'bar ' + (tp >= 70 ? 'good' : tp >= 40 ? 'mid' : 'low') }, h('i', { style: `width:${Math.max(tp, 2)}%` })));
+      })),
       h('h2', {}, 'เฉลยทีละข้อ'),
       h('div', { class: 'stack' }, reviewList),
       h('div', { class: 'grid two', style: 'margin-top:24px' },
