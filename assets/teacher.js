@@ -60,9 +60,9 @@
         rich('div', q.text, 'qtext'),
         q.image ? h('p', {}, h('img', { src: 'sets/' + q.image, alt: q.imageAlt || '' })) : null,
         q.type === 'num' ? h('p', {}, 'คำตอบ: ', h('span', { class: 'ans' }, String(q.answer) + (q.unit ? ' ' + q.unit : '')))
-          : h('ol', { class: 'choicelist', type: '1' }, q.choices.map((c, k) => { const li = rich('li', `${KEYS[k]}. ${c}`, k === q.answer ? 'correct' : ''); if (k === q.answer) li.append(' ✓'); return li; })),
+          : h('ul', { class: 'choicelist' }, q.choices.map((c, k) => { const li = rich('li', `${KEYS[k]}. ${c}`, k === q.answer ? 'correct' : ''); if (k === q.answer) li.append(' ✓'); return li; })),
         h('div', { class: 'exp' }, h('strong', {}, 'วิธีคิด'), h('ol', {}, (q.steps || []).map((s) => rich('li', s))), q.tip ? h('p', { class: 'muted' }, '💡 ' + q.tip) : null),
-        h('div', { class: 'mark' }, radio('ok', '✓ ถูก ใช้ได้'), radio('fix', '✗ ต้องแก้')),
+        h('div', { class: 'marks' }, radio('ok', '✓ ถูก ใช้ได้'), radio('fix', '✗ ต้องแก้')),
         h('label', { class: 'f' }, 'โน้ตถึง noob_dev (ถ้าต้องแก้ บอกว่าผิดตรงไหน)', h('textarea', { oninput: (e) => { r.note = e.target.value; save(); } }, r.note || '')));
     });
     view.replaceChildren(h('p', {}, h('a', { href: 'teacher.html' }, '← ทุกชุด')),

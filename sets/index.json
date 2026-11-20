@@ -53,6 +53,36 @@
       "questions": 30,
       "minutes": 60,
       "reviewed": true
+    },
+    {
+      "id": "kps-math-1",
+      "school": "kps",
+      "subject": "คณิตศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "kps-math-1.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "kps-sci-1",
+      "school": "kps",
+      "subject": "วิทยาศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "kps-sci-1.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "kps-eng-1",
+      "school": "kps",
+      "subject": "ภาษาอังกฤษ",
+      "title": "ชุดที่ 1",
+      "file": "kps-eng-1.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
     }
   ]
 }

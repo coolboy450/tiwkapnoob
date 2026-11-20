@@ -1,0 +1,496 @@
+{
+ "id": "kps-eng-1",
+ "school": "kps",
+ "subject": "ภาษาอังกฤษ",
+ "title": "ชุดที่ 1",
+ "minutes": 60,
+ "note": "ข้อสอบแนว แต่งใหม่ตามระดับสอบเข้า ม.1 ไม่ใช่ข้อสอบจริงของโรงเรียน · จำนวนข้อและเวลาเป็นรูปแบบโดยประมาณ",
+ "questions": [
+  {
+   "id": "pe1-01",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "She ___ to school every day.",
+   "choices": [
+    "go",
+    "going",
+    "goes",
+    "gone"
+   ],
+   "answer": 2,
+   "steps": [
+    "ประธานเอกพจน์ (she) ในประโยคที่ทำเป็นประจำ (every day) ใช้ present simple เติม -s/-es",
+    "go → goes"
+   ]
+  },
+  {
+   "id": "pe1-02",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "Look! They ___ football in the park now.",
+   "choices": [
+    "play",
+    "plays",
+    "are playing",
+    "played"
+   ],
+   "answer": 2,
+   "steps": [
+    "\"Look!\" และ \"now\" บอกว่ากำลังทำอยู่ ใช้ present continuous: are + V-ing"
+   ]
+  },
+  {
+   "id": "pe1-03",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "I ___ a movie with my family yesterday.",
+   "choices": [
+    "watch",
+    "watched",
+    "watches",
+    "am watching"
+   ],
+   "answer": 1,
+   "steps": [
+    "\"yesterday\" เป็นอดีต ใช้ past simple: watched"
+   ]
+  },
+  {
+   "id": "pe1-04",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "There ___ two cats under the table.",
+   "choices": [
+    "is",
+    "am",
+    "be",
+    "are"
+   ],
+   "answer": 3,
+   "steps": [
+    "\"two cats\" เป็นพหูพจน์ ใช้ There are"
+   ]
+  },
+  {
+   "id": "pe1-05",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "This is ___ umbrella.",
+   "choices": [
+    "a",
+    "some",
+    "any",
+    "an"
+   ],
+   "answer": 3,
+   "steps": [
+    "umbrella ขึ้นต้นด้วยเสียงสระ (u อ่านว่า อั) ใช้ an"
+   ]
+  },
+  {
+   "id": "pe1-06",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "My brother is ___ than me.",
+   "choices": [
+    "taller",
+    "tall",
+    "tallest",
+    "more tall"
+   ],
+   "answer": 0,
+   "steps": [
+    "เปรียบเทียบสองคน มี \"than\" ใช้ขั้นกว่า: tall → taller"
+   ]
+  },
+  {
+   "id": "pe1-07",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "Bangkok is the ___ city in Thailand.",
+   "choices": [
+    "big",
+    "bigger",
+    "more big",
+    "biggest"
+   ],
+   "answer": 3,
+   "steps": [
+    "มี \"the\" และเปรียบเทียบกับทั้งประเทศ ใช้ขั้นสูงสุด: big → biggest (ซ้ำตัว g)"
+   ]
+  },
+  {
+   "id": "pe1-08",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "We have lived in this house ___ 2020.",
+   "choices": [
+    "since",
+    "for",
+    "in",
+    "at"
+   ],
+   "answer": 0,
+   "steps": [
+    "since ใช้กับจุดเริ่มต้นของเวลา (ปี 2020)",
+    "for ใช้กับช่วงเวลา เช่น for five years"
+   ]
+  },
+  {
+   "id": "pe1-09",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "\"How ___ apples do you want?\" \"Three, please.\"",
+   "choices": [
+    "much",
+    "many",
+    "long",
+    "old"
+   ],
+   "answer": 1,
+   "steps": [
+    "apples นับได้ ใช้ How many",
+    "How much ใช้กับสิ่งที่นับไม่ได้ เช่น water, money"
+   ]
+  },
+  {
+   "id": "pe1-10",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "The opposite of \"cheap\" is ___.",
+   "choices": [
+    "small",
+    "easy",
+    "expensive",
+    "new"
+   ],
+   "answer": 2,
+   "steps": [
+    "cheap = ถูก ตรงข้ามคือ expensive = แพง"
+   ]
+  },
+  {
+   "id": "pe1-11",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "Which word has the same meaning as \"happy\"?",
+   "choices": [
+    "sad",
+    "glad",
+    "angry",
+    "tired"
+   ],
+   "answer": 1,
+   "steps": [
+    "happy = มีความสุข ความหมายเหมือน glad"
+   ]
+  },
+  {
+   "id": "pe1-12",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "A library is a place where you can ___.",
+   "choices": [
+    "borrow books",
+    "buy vegetables",
+    "see a doctor",
+    "swim"
+   ],
+   "answer": 0,
+   "steps": [
+    "library = ห้องสมุด ที่ยืมหนังสือ"
+   ]
+  },
+  {
+   "id": "pe1-13",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "Which one is a fruit?",
+   "choices": [
+    "carrot",
+    "cabbage",
+    "onion",
+    "mango"
+   ],
+   "answer": 3,
+   "steps": [
+    "mango (มะม่วง) เป็นผลไม้ ส่วนข้ออื่นเป็นผัก"
+   ]
+  },
+  {
+   "id": "pe1-14",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "I am hungry. I want to ___ something.",
+   "choices": [
+    "drink",
+    "eat",
+    "sleep",
+    "read"
+   ],
+   "answer": 1,
+   "steps": [
+    "hungry = หิว จึงอยากกิน (eat)"
+   ]
+  },
+  {
+   "id": "pe1-15",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "Can you ___ me with my homework?",
+   "choices": [
+    "helps",
+    "helped",
+    "helping",
+    "help"
+   ],
+   "answer": 3,
+   "steps": [
+    "หลัง can ใช้กริยารูปเดิม (ไม่เติม s, ed, ing)"
+   ]
+  },
+  {
+   "id": "pe1-16",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "If it rains tomorrow, we ___ at home.",
+   "choices": [
+    "will stay",
+    "stay",
+    "stayed",
+    "staying"
+   ],
+   "answer": 0,
+   "steps": [
+    "If + present simple แล้วประโยคหลังใช้ will + กริยารูปเดิม (เงื่อนไขที่เป็นไปได้ในอนาคต)"
+   ]
+  },
+  {
+   "id": "pe1-17",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "He doesn’t like coffee, ___ he?",
+   "choices": [
+    "is",
+    "does",
+    "doesn’t",
+    "isn’t"
+   ],
+   "answer": 1,
+   "steps": [
+    "ประโยคหน้าเป็นปฏิเสธ (doesn’t) คำถามท้ายเป็นบอกเล่า: does he?"
+   ]
+  },
+  {
+   "id": "pe1-18",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "The plural of \"child\" is ___.",
+   "choices": [
+    "childs",
+    "children",
+    "childes",
+    "childrens"
+   ],
+   "answer": 1,
+   "steps": [
+    "child เป็นคำนามพหูพจน์ไม่ปกติ: child → children"
+   ]
+  },
+  {
+   "id": "pe1-19",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "The past tense of \"go\" is ___.",
+   "choices": [
+    "went",
+    "goed",
+    "gone",
+    "goes"
+   ],
+   "answer": 0,
+   "steps": [
+    "go เป็นกริยาไม่ปกติ: go – went – gone",
+    "past simple ใช้ went"
+   ]
+  },
+  {
+   "id": "pe1-20",
+   "topic": "Conversation",
+   "type": "mc",
+   "text": "A: \"Thank you very much.\" B: \"___\"",
+   "choices": [
+    "Yes, I am.",
+    "Good morning.",
+    "You’re welcome.",
+    "See you."
+   ],
+   "answer": 2,
+   "steps": [
+    "ตอบรับคำขอบคุณด้วย \"You’re welcome.\" (ไม่เป็นไร ยินดี)"
+   ]
+  },
+  {
+   "id": "pe1-21",
+   "topic": "Conversation",
+   "type": "mc",
+   "text": "\"What time is it?\" \"It’s half past seven.\" What time is it?",
+   "choices": [
+    "7:00",
+    "7:15",
+    "7:30",
+    "6:30"
+   ],
+   "answer": 2,
+   "steps": [
+    "half past seven = เลยเจ็ดโมงมาครึ่งชั่วโมง = 7:30"
+   ]
+  },
+  {
+   "id": "pe1-22",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "The book is ___ the table. (วางอยู่บนโต๊ะ)",
+   "choices": [
+    "in",
+    "under",
+    "on",
+    "between"
+   ],
+   "answer": 2,
+   "steps": [
+    "บนพื้นผิว ใช้ on"
+   ]
+  },
+  {
+   "id": "pe1-23",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "Which sentence is correct?",
+   "choices": [
+    "She can swims.",
+    "She cans swim.",
+    "She can swimming.",
+    "She can swim."
+   ],
+   "answer": 3,
+   "steps": [
+    "หลัง can ใช้กริยารูปเดิม และ can ไม่เติม s",
+    "ถูกต้อง: She can swim."
+   ]
+  },
+  {
+   "id": "pe1-24",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "The day after Wednesday is ___.",
+   "choices": [
+    "Thursday",
+    "Tuesday",
+    "Friday",
+    "Monday"
+   ],
+   "answer": 0,
+   "steps": [
+    "Monday, Tuesday, Wednesday, Thursday… วันถัดจากพุธคือพฤหัสบดี"
+   ]
+  },
+  {
+   "id": "pe1-25",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "Which month has only 28 or 29 days?",
+   "choices": [
+    "January",
+    "February",
+    "April",
+    "June"
+   ],
+   "answer": 1,
+   "steps": [
+    "February (กุมภาพันธ์) มี 28 วัน หรือ 29 วันในปีอธิกสุรทิน"
+   ]
+  },
+  {
+   "id": "pe1-26",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "A person who looks after sick people in a hospital is a ___.",
+   "choices": [
+    "nurse",
+    "farmer",
+    "pilot",
+    "chef"
+   ],
+   "answer": 0,
+   "steps": [
+    "nurse = พยาบาล ดูแลคนป่วยในโรงพยาบาล",
+    "farmer ชาวนา pilot นักบิน chef พ่อครัว"
+   ]
+  },
+  {
+   "id": "pe1-27",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Nok gets up at six o’clock every morning. She has rice and eggs for breakfast. Then she goes to school by bus. Her favourite subject is science because she likes doing experiments. After school, she plays badminton with her friends.\n\nWhat time does Nok get up?",
+   "choices": [
+    "at six o’clock",
+    "at five o’clock",
+    "at seven o’clock",
+    "after school"
+   ],
+   "answer": 0,
+   "steps": [
+    "ประโยคแรก: \"Nok gets up at six o’clock every morning.\""
+   ]
+  },
+  {
+   "id": "pe1-28",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Nok gets up at six o’clock every morning. She has rice and eggs for breakfast. Then she goes to school by bus. Her favourite subject is science because she likes doing experiments. After school, she plays badminton with her friends.\n\nHow does Nok go to school?",
+   "choices": [
+    "on foot",
+    "by car",
+    "by bus",
+    "by bicycle"
+   ],
+   "answer": 2,
+   "steps": [
+    "\"Then she goes to school by bus.\""
+   ]
+  },
+  {
+   "id": "pe1-29",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Nok gets up at six o’clock every morning. She has rice and eggs for breakfast. Then she goes to school by bus. Her favourite subject is science because she likes doing experiments. After school, she plays badminton with her friends.\n\nWhy does Nok like science?",
+   "choices": [
+    "Her teacher is kind.",
+    "It is easy.",
+    "Her friends like it.",
+    "She likes doing experiments."
+   ],
+   "answer": 3,
+   "steps": [
+    "\"…because she likes doing experiments.\" คำว่า because บอกเหตุผล"
+   ]
+  },
+  {
+   "id": "pe1-30",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Nok gets up at six o’clock every morning. She has rice and eggs for breakfast. Then she goes to school by bus. Her favourite subject is science because she likes doing experiments. After school, she plays badminton with her friends.\n\nWhat does Nok do after school?",
+   "choices": [
+    "She does homework.",
+    "She plays badminton.",
+    "She watches TV.",
+    "She goes shopping."
+   ],
+   "answer": 1,
+   "steps": [
+    "\"After school, she plays badminton with her friends.\""
+   ]
+  }
+ ]
+}
