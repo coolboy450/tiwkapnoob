@@ -1,0 +1,507 @@
+{
+ "id": "triam-eng-m4",
+ "school": "triam",
+ "subject": "ภาษาอังกฤษ",
+ "title": "ชุดที่ 1",
+ "minutes": 60,
+ "note": "ข้อสอบแนว แต่งใหม่ตามระดับสอบเข้า ม.4 (เนื้อหา ม.ต้น) ไม่ใช่ข้อสอบจริงของโรงเรียน · จำนวนข้อ เวลา และหัวข้อเป็นรูปแบบโดยประมาณจากข้อมูลที่เปิดเผย",
+ "questions": [
+  {
+   "id": "te-01",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "The window ___ by the boy yesterday.",
+   "choices": [
+    "broke",
+    "is broken",
+    "was broken",
+    "has broke"
+   ],
+   "answer": 2,
+   "steps": [
+    "ประโยค passive ในอดีต: was/were + V3",
+    "break – broke – broken จึงใช้ was broken"
+   ]
+  },
+  {
+   "id": "te-02",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "English ___ in many countries around the world.",
+   "choices": [
+    "speaks",
+    "spoke",
+    "speaking",
+    "is spoken"
+   ],
+   "answer": 3,
+   "steps": [
+    "ประธานคือภาษา ถูกพูด (passive) ปัจจุบัน: is/are + V3",
+    "is spoken"
+   ]
+  },
+  {
+   "id": "te-03",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "If I ___ a bird, I would fly to you.",
+   "choices": [
+    "were",
+    "am",
+    "was",
+    "will be"
+   ],
+   "answer": 0,
+   "steps": [
+    "conditional type 2 (สมมติที่ไม่เป็นจริง): If + past simple, would + V1",
+    "กับ be ใช้ were กับทุกประธาน"
+   ]
+  },
+  {
+   "id": "te-04",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "If it rains tomorrow, we ___ the picnic.",
+   "choices": [
+    "will cancel",
+    "cancel",
+    "would cancel",
+    "cancelled"
+   ],
+   "answer": 0,
+   "steps": [
+    "conditional type 1 (เป็นไปได้ในอนาคต): If + present simple, will + V1"
+   ]
+  },
+  {
+   "id": "te-05",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "The girl ___ is standing there is my cousin.",
+   "choices": [
+    "which",
+    "whose",
+    "who",
+    "whom is"
+   ],
+   "answer": 2,
+   "steps": [
+    "relative pronoun แทนคน (เป็นประธาน) ใช้ who",
+    "which แทนสิ่งของ whose แสดงความเป็นเจ้าของ"
+   ]
+  },
+  {
+   "id": "te-06",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "This is the book ___ I bought yesterday.",
+   "choices": [
+    "who",
+    "what",
+    "that",
+    "whose"
+   ],
+   "answer": 2,
+   "steps": [
+    "relative pronoun แทนสิ่งของ ใช้ which หรือ that",
+    "ในตัวเลือกมีเพียง that"
+   ]
+  },
+  {
+   "id": "te-07",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "She said, \"I am tired.\" → She said that she ___ tired.",
+   "choices": [
+    "was",
+    "is",
+    "were",
+    "has been"
+   ],
+   "answer": 0,
+   "steps": [
+    "reported speech ถอยกลับหนึ่ง tense: am/is → was",
+    "she said that she was tired"
+   ]
+  },
+  {
+   "id": "te-08",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "He asked me, \"Where do you live?\" → He asked me where I ___.",
+   "choices": [
+    "live",
+    "lived",
+    "do live",
+    "am living"
+   ],
+   "answer": 1,
+   "steps": [
+    "reported question: ถอย tense (present → past) และใช้ลำดับประโยคบอกเล่า",
+    "where I lived"
+   ]
+  },
+  {
+   "id": "te-09",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "I enjoy ___ to music in my free time.",
+   "choices": [
+    "listening",
+    "listen",
+    "to listen",
+    "listened"
+   ],
+   "answer": 0,
+   "steps": [
+    "enjoy + V-ing (gerund)",
+    "enjoy listening"
+   ]
+  },
+  {
+   "id": "te-10",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "She decided ___ a new job.",
+   "choices": [
+    "look for",
+    "looking for",
+    "to look for",
+    "looked for"
+   ],
+   "answer": 2,
+   "steps": [
+    "decide + to + V1 (infinitive)",
+    "decided to look for"
+   ]
+  },
+  {
+   "id": "te-11",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "I have lived here ___ five years.",
+   "choices": [
+    "since",
+    "for",
+    "during",
+    "ago"
+   ],
+   "answer": 1,
+   "steps": [
+    "for + ช่วงเวลา (five years) ส่วน since + จุดเริ่มต้นของเวลา"
+   ]
+  },
+  {
+   "id": "te-12",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "By the time we arrived, the film ___.",
+   "choices": [
+    "already started",
+    "has already started",
+    "was already start",
+    "had already started"
+   ],
+   "answer": 3,
+   "steps": [
+    "เหตุการณ์ที่เกิดก่อนอีกเหตุการณ์ในอดีต ใช้ past perfect: had + V3",
+    "had already started"
+   ]
+  },
+  {
+   "id": "te-13",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "Neither Tom ___ his sisters were at home.",
+   "choices": [
+    "or",
+    "and",
+    "but",
+    "nor"
+   ],
+   "answer": 3,
+   "steps": [
+    "โครงสร้าง neither … nor …",
+    "ไม่ทั้งคู่"
+   ]
+  },
+  {
+   "id": "te-14",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "He is ___ tall that he can touch the ceiling.",
+   "choices": [
+    "such",
+    "so",
+    "too",
+    "very much"
+   ],
+   "answer": 1,
+   "steps": [
+    "so + adjective + that + ประโยคผลลัพธ์",
+    "so tall that …"
+   ]
+  },
+  {
+   "id": "te-15",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "She works hard. ___, she never gets tired.",
+   "choices": [
+    "Therefore",
+    "Because",
+    "However",
+    "So that"
+   ],
+   "answer": 2,
+   "steps": [
+    "ประโยคหลังขัดแย้งกับความคาดหมาย (ทำงานหนักแต่ไม่เหนื่อย) ใช้ However",
+    "Therefore แปลว่า ดังนั้น"
+   ]
+  },
+  {
+   "id": "te-16",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "The meaning of \"enormous\" is closest to ___.",
+   "choices": [
+    "huge",
+    "tiny",
+    "quiet",
+    "ancient"
+   ],
+   "answer": 0,
+   "steps": [
+    "enormous = ใหญ่โตมาก ใกล้เคียงกับ huge"
+   ]
+  },
+  {
+   "id": "te-17",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "We need to ___ the problem before it gets worse.",
+   "choices": [
+    "solved",
+    "solving",
+    "solves to",
+    "solve"
+   ],
+   "answer": 3,
+   "steps": [
+    "need to + V1 (รูปเดิม)",
+    "solve"
+   ]
+  },
+  {
+   "id": "te-18",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "Which word is a noun?",
+   "choices": [
+    "quickly",
+    "beautiful",
+    "decide",
+    "happiness"
+   ],
+   "answer": 3,
+   "steps": [
+    "happiness (ความสุข) เป็นคำนาม",
+    "quickly คือ adverb beautiful คือ adjective decide คือ verb"
+   ]
+  },
+  {
+   "id": "te-19",
+   "topic": "Vocabulary",
+   "type": "mc",
+   "text": "The opposite of \"increase\" is ___.",
+   "choices": [
+    "improve",
+    "continue",
+    "decrease",
+    "discover"
+   ],
+   "answer": 2,
+   "steps": [
+    "increase = เพิ่มขึ้น ตรงข้ามคือ decrease = ลดลง"
+   ]
+  },
+  {
+   "id": "te-20",
+   "topic": "Conversation",
+   "type": "mc",
+   "text": "A: \"Would you mind opening the window?\" B: \"___\"",
+   "choices": [
+    "Not at all.",
+    "Yes, I would.",
+    "No, I don’t.",
+    "Of course not, thanks."
+   ],
+   "answer": 0,
+   "steps": [
+    "Would you mind … ? ถ้ายินดีทำให้ ตอบปฏิเสธ (ไม่รังเกียจ): \"Not at all.\" / \"Of course not.\"",
+    "\"Not at all.\" ตรงที่สุดในตัวเลือก"
+   ]
+  },
+  {
+   "id": "te-21",
+   "topic": "Conversation",
+   "type": "mc",
+   "text": "A: \"How about going to the cinema tonight?\" B: \"___\"",
+   "choices": [
+    "Yes, I went.",
+    "That sounds great!",
+    "It is a film.",
+    "I don’t have a cinema."
+   ],
+   "answer": 1,
+   "steps": [
+    "\"How about …?\" เป็นการชวน ตอบรับด้วย \"That sounds great!\""
+   ]
+  },
+  {
+   "id": "te-22",
+   "topic": "Conversation",
+   "type": "mc",
+   "text": "A: \"I’m sorry I’m late.\" B: \"___\"",
+   "choices": [
+    "You’re welcome.",
+    "That’s all right.",
+    "Good luck.",
+    "Me too."
+   ],
+   "answer": 1,
+   "steps": [
+    "ตอบรับคำขอโทษด้วย \"That’s all right.\" / \"No problem.\""
+   ]
+  },
+  {
+   "id": "te-23",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Many students in Thailand use their smartphones to study. They can watch video lessons, read e-books and practise English with apps. However, some students spend too much time playing games or chatting instead of studying. Teachers say that students should set rules for themselves, such as turning off notifications while doing homework.\n\nWhat can students do with smartphones, according to the passage?",
+   "choices": [
+    "Cook meals",
+    "Repair cars",
+    "Watch video lessons",
+    "Take medicine"
+   ],
+   "answer": 2,
+   "steps": [
+    "ประโยคที่ 2: \"They can watch video lessons, read e-books and practise English with apps.\""
+   ]
+  },
+  {
+   "id": "te-24",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Many students in Thailand use their smartphones to study. They can watch video lessons, read e-books and practise English with apps. However, some students spend too much time playing games or chatting instead of studying. Teachers say that students should set rules for themselves, such as turning off notifications while doing homework.\n\nWhat do some students spend too much time doing?",
+   "choices": [
+    "Reading e-books",
+    "Playing games or chatting",
+    "Doing homework",
+    "Sleeping"
+   ],
+   "answer": 1,
+   "steps": [
+    "\"…some students spend too much time playing games or chatting instead of studying.\""
+   ]
+  },
+  {
+   "id": "te-25",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Many students in Thailand use their smartphones to study. They can watch video lessons, read e-books and practise English with apps. However, some students spend too much time playing games or chatting instead of studying. Teachers say that students should set rules for themselves, such as turning off notifications while doing homework.\n\nWhat do teachers suggest?",
+   "choices": [
+    "Students should throw away their phones.",
+    "Students should study only at night.",
+    "Parents should check the phones.",
+    "Students should set rules for themselves."
+   ],
+   "answer": 3,
+   "steps": [
+    "\"Teachers say that students should set rules for themselves, such as turning off notifications…\""
+   ]
+  },
+  {
+   "id": "te-26",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Last month, Ploy joined a school trip to a national park. She had never seen so many trees before. A guide taught the students how to recognise birds by their songs. At night, they sat around a campfire and shared stories. Ploy was tired when she came home, but she told her parents it was the best trip she had ever had.\n\nWhere did Ploy go last month?",
+   "choices": [
+    "To a national park",
+    "To a museum",
+    "To the beach",
+    "To her grandmother’s house"
+   ],
+   "answer": 0,
+   "steps": [
+    "\"…Ploy joined a school trip to a national park.\""
+   ]
+  },
+  {
+   "id": "te-27",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Last month, Ploy joined a school trip to a national park. She had never seen so many trees before. A guide taught the students how to recognise birds by their songs. At night, they sat around a campfire and shared stories. Ploy was tired when she came home, but she told her parents it was the best trip she had ever had.\n\nHow did the students learn to recognise birds?",
+   "choices": [
+    "By watching a film",
+    "By listening to their songs",
+    "By reading a book",
+    "By taking photos"
+   ],
+   "answer": 1,
+   "steps": [
+    "\"A guide taught the students how to recognise birds by their songs.\""
+   ]
+  },
+  {
+   "id": "te-28",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Last month, Ploy joined a school trip to a national park. She had never seen so many trees before. A guide taught the students how to recognise birds by their songs. At night, they sat around a campfire and shared stories. Ploy was tired when she came home, but she told her parents it was the best trip she had ever had.\n\nHow did Ploy feel about the trip?",
+   "choices": [
+    "It was the best trip she had ever had.",
+    "It was boring.",
+    "It was too short.",
+    "It was too dangerous."
+   ],
+   "answer": 0,
+   "steps": [
+    "ประโยคสุดท้าย: \"…it was the best trip she had ever had.\""
+   ]
+  },
+  {
+   "id": "te-29",
+   "topic": "Reading",
+   "type": "mc",
+   "text": "Last month, Ploy joined a school trip to a national park. She had never seen so many trees before. A guide taught the students how to recognise birds by their songs. At night, they sat around a campfire and shared stories. Ploy was tired when she came home, but she told her parents it was the best trip she had ever had.\n\nWhat did the students do at night?",
+   "choices": [
+    "They went swimming.",
+    "They went home.",
+    "They played football.",
+    "They sat around a campfire and shared stories."
+   ],
+   "answer": 3,
+   "steps": [
+    "\"At night, they sat around a campfire and shared stories.\""
+   ]
+  },
+  {
+   "id": "te-30",
+   "topic": "Grammar",
+   "type": "mc",
+   "text": "My sister is good ___ playing the piano.",
+   "choices": [
+    "in",
+    "at",
+    "on",
+    "for"
+   ],
+   "answer": 1,
+   "steps": [
+    "good at + V-ing (เก่งเรื่อง…)",
+    "good at playing"
+   ]
+  }
+ ]
+}

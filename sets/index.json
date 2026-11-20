@@ -2,15 +2,33 @@
   "schools": [
     {
       "id": "suankularb",
-      "name": "สวนกุหลาบวิทยาลัย"
+      "name": "สวนกุหลาบวิทยาลัย",
+      "level": "m1"
     },
     {
       "id": "samsen",
-      "name": "สามเสนวิทยาลัย"
+      "name": "สามเสนวิทยาลัย",
+      "level": "m1"
     },
     {
       "id": "kps",
-      "name": "สาธิตเกษตร กำแพงแสน"
+      "name": "สาธิตเกษตร กำแพงแสน",
+      "level": "m1"
+    },
+    {
+      "id": "triam",
+      "name": "เตรียมอุดมศึกษา (สายวิทย์-คณิต)",
+      "level": "m4"
+    },
+    {
+      "id": "suankularb-m4",
+      "name": "สวนกุหลาบวิทยาลัย",
+      "level": "m4"
+    },
+    {
+      "id": "samsen-m4",
+      "name": "สามเสนวิทยาลัย",
+      "level": "m4"
     }
   ],
   "sets": [
@@ -83,6 +101,76 @@
       "questions": 30,
       "minutes": 60,
       "reviewed": true
+    },
+    {
+      "id": "triam-math-m4",
+      "school": "triam",
+      "subject": "คณิตศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "triam-math-m4.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "triam-sci-m4",
+      "school": "triam",
+      "subject": "วิทยาศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "triam-sci-m4.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "triam-eng-m4",
+      "school": "triam",
+      "subject": "ภาษาอังกฤษ",
+      "title": "ชุดที่ 1",
+      "file": "triam-eng-m4.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "suankularb-math-m4",
+      "school": "suankularb-m4",
+      "subject": "คณิตศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "suankularb-math-m4.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "suankularb-sci-m4",
+      "school": "suankularb-m4",
+      "subject": "วิทยาศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "suankularb-sci-m4.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "samsen-math-m4",
+      "school": "samsen-m4",
+      "subject": "คณิตศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "samsen-math-m4.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
+    },
+    {
+      "id": "samsen-sci-m4",
+      "school": "samsen-m4",
+      "subject": "วิทยาศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "samsen-sci-m4.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": false
     }
   ]
 }
