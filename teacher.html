@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>หน้าตรวจของครู — ติวกับนูบ</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .mark{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .mark label{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border:1px solid var(--border);border-radius:10px;cursor:pointer}
+  .mark input{width:20px;height:20px}
+  textarea{width:100%;min-height:64px;border:1px solid var(--border);border-radius:10px;padding:10px;font:inherit;background:var(--bg);color:var(--text)}
+  .ans{font-weight:700;color:var(--ok)}
+  .sum{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--border);padding:12px 0;display:grid;gap:8px}
+  .choicelist{padding-left:22px}
+  .choicelist li.correct{color:var(--ok);font-weight:700}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="./"><span class="mark" aria-hidden="true">นูบ</span><span>หน้าตรวจของครู</span></a></header>
+<main id="view" tabindex="-1"></main>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script defer src="assets/teacher.js"></script>
+</body>
+</html>

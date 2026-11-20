@@ -1,0 +1,11 @@
+{
+  "name": "ติวกับนูบ",
+  "short_name": "ติวกับนูบ",
+  "description": "ข้อสอบแนวสอบเข้า ม.1 วิชาคณิตและวิทย์ พร้อมเฉลยทีละขั้น",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "lang": "th",
+  "icons": [{ "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
