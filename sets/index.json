@@ -62,7 +62,7 @@
       "file": "kps-math-1.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "kps-sci-1",
@@ -72,7 +72,7 @@
       "file": "kps-sci-1.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "kps-eng-1",
@@ -82,7 +82,7 @@
       "file": "kps-eng-1.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     }
   ]
 }
