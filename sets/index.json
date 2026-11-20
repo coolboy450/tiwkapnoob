@@ -110,7 +110,7 @@
       "file": "triam-math-m4.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "triam-sci-m4",
@@ -120,7 +120,7 @@
       "file": "triam-sci-m4.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "triam-eng-m4",
@@ -130,7 +130,7 @@
       "file": "triam-eng-m4.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "suankularb-math-m4",
@@ -140,7 +140,7 @@
       "file": "suankularb-math-m4.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "suankularb-sci-m4",
@@ -150,7 +150,7 @@
       "file": "suankularb-sci-m4.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "samsen-math-m4",
@@ -160,7 +160,7 @@
       "file": "samsen-math-m4.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     },
     {
       "id": "samsen-sci-m4",
@@ -170,7 +170,7 @@
       "file": "samsen-sci-m4.json",
       "questions": 30,
       "minutes": 60,
-      "reviewed": false
+      "reviewed": true
     }
   ]
 }
