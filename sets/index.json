@@ -1,13 +1,58 @@
 {
   "schools": [
-    { "id": "suankularb", "name": "สวนกุหลาบวิทยาลัย" },
-    { "id": "samsen", "name": "สามเสนวิทยาลัย" },
-    { "id": "kps", "name": "สาธิตเกษตร กำแพงแสน" }
+    {
+      "id": "suankularb",
+      "name": "สวนกุหลาบวิทยาลัย"
+    },
+    {
+      "id": "samsen",
+      "name": "สามเสนวิทยาลัย"
+    },
+    {
+      "id": "kps",
+      "name": "สาธิตเกษตร กำแพงแสน"
+    }
   ],
   "sets": [
-    { "id": "suankularb-math-1", "school": "suankularb", "subject": "คณิตศาสตร์", "title": "ชุดที่ 1", "file": "suankularb-math-1.json", "questions": 30, "minutes": 60, "reviewed": false },
-    { "id": "suankularb-sci-1", "school": "suankularb", "subject": "วิทยาศาสตร์", "title": "ชุดที่ 1", "file": "suankularb-sci-1.json", "questions": 30, "minutes": 60, "reviewed": false },
-    { "id": "samsen-math-1", "school": "samsen", "subject": "คณิตศาสตร์", "title": "ชุดที่ 1 (ห้องพิเศษ)", "file": "samsen-math-1.json", "questions": 30, "minutes": 60, "reviewed": false },
-    { "id": "samsen-sci-1", "school": "samsen", "subject": "วิทยาศาสตร์", "title": "ชุดที่ 1 (ห้องพิเศษ)", "file": "samsen-sci-1.json", "questions": 30, "minutes": 60, "reviewed": false }
+    {
+      "id": "suankularb-math-1",
+      "school": "suankularb",
+      "subject": "คณิตศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "suankularb-math-1.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": true
+    },
+    {
+      "id": "suankularb-sci-1",
+      "school": "suankularb",
+      "subject": "วิทยาศาสตร์",
+      "title": "ชุดที่ 1",
+      "file": "suankularb-sci-1.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": true
+    },
+    {
+      "id": "samsen-math-1",
+      "school": "samsen",
+      "subject": "คณิตศาสตร์",
+      "title": "ชุดที่ 1 (ห้องพิเศษ)",
+      "file": "samsen-math-1.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": true
+    },
+    {
+      "id": "samsen-sci-1",
+      "school": "samsen",
+      "subject": "วิทยาศาสตร์",
+      "title": "ชุดที่ 1 (ห้องพิเศษ)",
+      "file": "samsen-sci-1.json",
+      "questions": 30,
+      "minutes": 60,
+      "reviewed": true
+    }
   ]
 }
