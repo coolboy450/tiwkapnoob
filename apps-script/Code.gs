@@ -44,7 +44,51 @@ function doPost(e) {
   }
 }
 
-function doGet() { return out_({ ok: true, app: 'tiwkapnoob' }); }
+/**
+ * ดึงข้อมูลให้แอป (อ่านอย่างเดียว):
+ *   ?action=room&room=SK1            -> { ok, valid }          เช็กว่ารหัสห้องมีจริงไหม
+ *   ?action=rank&room=SK1&set=<id>   -> { ok, rows:[{nick,best,total,attempts}] }  อันดับในห้อง (ชื่อเล่น + คะแนนดีที่สุด)
+ * ต้องรู้รหัสห้องที่มีอยู่ในชีต "ห้อง" ถึงจะดูอันดับได้ และไม่ส่งข้อมูลอื่นออกไปเลย
+ */
+function doGet(e) {
+  try {
+    const p = (e && e.parameter) || {};
+    if (p.action === 'room') return out_({ ok: true, valid: roomOk_(p.room) });
+    if (p.action === 'rank') return out_(rank_(p.room, p.set));
+    return out_({ ok: true, app: 'tiwkapnoob' });
+  } catch (err) {
+    return out_({ ok: false, error: 'bad request' });
+  }
+}
+
+function roomOk_(room) {
+  const r = clean_(room, 12).toUpperCase();
+  if (!r) return false;
+  const allowed = sheet_(ROOMS, ['รหัสห้อง']).getRange('A2:A').getValues().map((x) => String(x[0]).trim().toUpperCase()).filter(String);
+  return allowed.indexOf(r) >= 0;
+}
+
+function rank_(room, setId) {
+  const r = clean_(room, 12).toUpperCase(), sid = clean_(setId, 40);
+  if (!roomOk_(r) || !sid) return { ok: false, error: 'room' };
+  const cache = CacheService.getScriptCache(), key = 'rank:' + r + ':' + sid;
+  const hit = cache.get(key);
+  if (hit) return JSON.parse(hit);
+  const rows = sheet_(SCORES, HEADERS).getDataRange().getValues().slice(1);   // คอลัมน์: 1 ห้อง 2 ชื่อเล่น 3 ชุด 4 ครั้งที่ 5 คะแนน 6 เต็ม
+  const best = {};
+  rows.forEach((x) => {
+    if (String(x[1]).toUpperCase() !== r || String(x[3]) !== sid) return;
+    const nick = String(x[2]).replace(/^'/, ''), k = nick.toLowerCase();
+    const sc = Number(x[5]), tot = Number(x[6]);
+    if (!best[k]) best[k] = { nick: nick, best: sc, total: tot, attempts: 0 };
+    best[k].attempts++;
+    if (sc > best[k].best) best[k].best = sc;
+  });
+  const list = Object.keys(best).map((k) => best[k]).sort((a, b) => b.best - a.best || a.attempts - b.attempts).slice(0, 100);
+  const out = { ok: true, rows: list };
+  cache.put(key, JSON.stringify(out), 20);
+  return out;
+}
 
 function out_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
 

@@ -95,16 +95,33 @@
   }
 
   /* ---------- pages ---------- */
+  /* ---------- profile / level ---------- */
+  const LEVELS = { m1: 'ม.1', m4: 'ม.4' };
+  const profile = () => ({ nick: '', room: '', level: 'm1', ...store.get('profile', {}) });
+  const saveProfile = (p) => store.set('profile', { ...profile(), ...p });
+  const levelOf = (idx, setMeta) => ((idx.schools.find((x) => x.id === setMeta.school) || {}).level) || 'm1';
+  const allAttempts = (idx) => {   // every attempt on this device, newest first
+    const out = [];
+    for (const s of idx.sets) for (const a of store.get('attempts:' + s.id, [])) out.push({ ...a, set: s });
+    return out.sort((a, b) => b.at - a.at);
+  };
+
   async function pageHome() {
     const idx = await loadIndex();
     const sets = visibleSets(idx);
-    const nick = store.get('profile', { nick: '' }).nick;
+    const me = profile();
+    let lv = LEVELS[me.level] ? me.level : 'm1';
+    const levelsWithSets = Object.keys(LEVELS).filter((k) => idx.schools.some((sc) => (sc.level || 'm1') === k && sets.some((s) => s.school === sc.id)));
+    if (levelsWithSets.length && !levelsWithSets.includes(lv)) lv = levelsWithSets[0];   // saved level has no sets yet
     view.replaceChildren(
       h('section', { class: 'hero' },
-        h('h1', {}, nick ? `สวัสดี ${nick} 👋` : 'ข้อสอบแนวสอบเข้า ม.1'),
+        h('h1', {}, me.nick ? `สวัสดี ${me.nick} 👋` : `ข้อสอบแนวสอบเข้า ${LEVELS[lv]}`),
         h('p', { class: 'lead' }, 'เลือกชุดที่อยากฝึก ทำให้เหมือนวันสอบจริง แล้วดูว่าหัวข้อไหนควรทบทวน'),
         h('ul', { class: 'feats' }, h('li', {}, '⏱️ จับเวลาเหมือนจริง'), h('li', {}, '📊 รู้จุดที่ต้องทบทวน'), h('li', {}, '💡 เฉลยทีละขั้น'))),
-      ...idx.schools.map((sc) => {
+      h('div', { class: 'seg', role: 'tablist', 'aria-label': 'เลือกระดับ' }, Object.entries(LEVELS).map(([k, name]) =>
+        h('button', { type: 'button', role: 'tab', class: 'seg-b', 'aria-selected': String(k === lv), disabled: !levelsWithSets.includes(k) && k !== lv,
+          onclick: () => { saveProfile({ level: k }); render(); } }, `สอบเข้า ${name}`))),
+      ...idx.schools.filter((sc) => (sc.level || 'm1') === lv).map((sc) => {
         const list = sets.filter((s) => s.school === sc.id);
         return h('section', { class: 'school' },
           h('h2', {}, 'แนว' + sc.name),
@@ -125,7 +142,7 @@
 
   async function pageStart(id) {
     const set = await loadSet(id);
-    const prof = store.get('profile', { nick: '', room: '' });
+    const prof = profile();
     const active = store.get('active:' + id, null);
     const nick = h('input', { type: 'text', id: 'nick', maxlength: '20', autocomplete: 'nickname', value: prof.nick, required: true });
     const room = h('input', { type: 'text', id: 'room', maxlength: '12', autocomplete: 'off', value: prof.room, style: 'text-transform:uppercase' });
@@ -135,7 +152,7 @@
       e.preventDefault();
       const n = nick.value.trim();
       if (!n) { err.textContent = 'ใส่ชื่อเล่นก่อนนะ'; err.hidden = false; nick.focus(); return; }
-      store.set('profile', { nick: n, room: room.value.trim().toUpperCase() });
+      saveProfile({ nick: n, room: room.value.trim().toUpperCase() });
       if (!active) {
         const now = Date.now();
         store.set('active:' + id, { startedAt: now, deadline: now + set.minutes * 60000, answers: {}, flags: {}, cur: 0 });
@@ -217,8 +234,8 @@
         const t = byTopic[q.topic] || (byTopic[q.topic] = { right: 0, total: 0 }); t.total++; if (ok) t.right++;
       }
       const tries = store.get('attempts:' + id, []);
-      const prof = store.get('profile', { nick: '', room: '' });
-      const att = { n: tries.length + 1, at: Date.now(), secs: Math.round((Math.min(Date.now(), st.deadline) - st.startedAt) / 1000), auto, answers: st.answers, score, total: Q.length, byTopic };
+      const prof = profile();
+      const att = { n: (tries.length ? tries[tries.length - 1].n : 0) + 1, at: Date.now(), secs: Math.round((Math.min(Date.now(), st.deadline) - st.startedAt) / 1000), auto, answers: st.answers, score, total: Q.length, byTopic };
       tries.push(att); store.set('attempts:' + id, tries.slice(-20)); store.del('active:' + id);
       if (prof.room && CFG.SHEET_URL && !PREVIEW) {
         const box = store.get('outbox', []);
@@ -246,15 +263,16 @@
     drawQ(); tick(); clearInterval(ticker); ticker = setInterval(tick, 500);
   }
 
-  async function pageResult(id) {
+  async function pageResult(id, n) {
     const set = await loadSet(id);
     const tries = store.get('attempts:' + id, []);
-    const att = tries[tries.length - 1];
+    const att = n ? tries.find((t) => t.n === Number(n)) : tries[tries.length - 1];
     if (!att) return go('#/start/' + id);
-    const prof = store.get('profile', { nick: '', room: '' });
+    const prof = profile();
     const pct = Math.round((att.score / att.total) * 100);
     const sendNote = h('p', { class: 'muted' });
-    if (PREVIEW) sendNote.textContent = 'โหมดตรวจของครู: ไม่ส่งผลเข้า Google Sheet';
+    if (n && att !== tries[tries.length - 1]) sendNote.textContent = `กำลังดูผลย้อนหลัง ครั้งที่ ${att.n} · ${new Date(att.at).toLocaleString('th-TH', { dateStyle: 'medium', timeStyle: 'short' })}`;
+    else if (PREVIEW) sendNote.textContent = 'โหมดตรวจของครู: ไม่ส่งผลเข้า Google Sheet';
     else if (!prof.room) sendNote.textContent = 'ไม่ได้ใส่รหัสห้อง คะแนนนี้อยู่บนเครื่องนี้อย่างเดียว';
     else if (!CFG.SHEET_URL) sendNote.textContent = 'ครูยังไม่ได้เชื่อม Google Sheet คะแนนนี้อยู่บนเครื่องนี้อย่างเดียว';
     else { sendNote.textContent = 'กำลังส่งคะแนนให้ครู…'; flushOutbox().then((ok) => { sendNote.textContent = ok ? `ส่งคะแนนให้ครูแล้ว (ห้อง ${prof.room})` : 'ยังส่งคะแนนไม่ได้ (ไม่มีเน็ต?) จะลองส่งใหม่ตอนเปิดแอปครั้งหน้า'; }); }
@@ -303,15 +321,134 @@
     math(view);
   }
 
+  /* ---------- my scores (device history) ---------- */
+  async function pageMe() {
+    const idx = await loadIndex();
+    const me = profile();
+    const sets = idx.sets.filter((s) => s.reviewed || PREVIEW);
+    const done = sets.map((s) => ({ s, tries: store.get('attempts:' + s.id, []) })).filter((x) => x.tries.length);
+    const total = done.reduce((a, x) => a + x.tries.length, 0);
+    const mins = Math.round(done.reduce((a, x) => a + x.tries.reduce((b, t) => b + (t.secs || 0), 0), 0) / 60);
+    const body = [h('h1', {}, 'คะแนนของฉัน'), h('p', { class: 'lead' }, me.nick ? `${me.nick}${me.room ? ' · ห้อง ' + me.room : ''}` : 'ยังไม่ได้ตั้งชื่อเล่น (ตั้งได้ที่แท็บ "ฉัน")')];
+    if (!done.length) {
+      body.push(h('div', { class: 'card empty' }, h('p', { class: 'big', 'aria-hidden': 'true' }, '📝'), h('p', {}, 'ยังไม่มีคะแนน ลองทำข้อสอบสักชุดดูนะ'), h('a', { class: 'btn p', href: '#/' }, 'ไปเลือกชุดข้อสอบ')));
+    } else {
+      body.push(h('div', { class: 'stats' },
+        h('div', { class: 'stat' }, h('b', {}, String(total)), h('span', {}, 'ครั้งที่ทำ')),
+        h('div', { class: 'stat' }, h('b', {}, String(done.length)), h('span', {}, 'ชุดที่ลอง')),
+        h('div', { class: 'stat' }, h('b', {}, String(mins)), h('span', {}, 'นาทีที่ฝึก'))));
+      for (const { s, tries } of done) {
+        const best = Math.max(...tries.map((t) => t.score)); const last = tries[tries.length - 1];
+        const sc = idx.schools.find((x) => x.id === s.school) || {};
+        body.push(h('section', { class: 'card stack' },
+          h('div', { class: 'row-between' }, h('div', {}, h('strong', {}, `${s.subject} · ${s.title}`), h('div', { class: 'meta' }, `แนว${sc.name || ''} · ${LEVELS[sc.level || 'm1']}`)),
+            h('div', { class: 'best' }, h('b', {}, `${best}/${last.total}`), h('span', {}, 'ดีที่สุด'))),
+          h('div', { class: 'spark', role: 'img', 'aria-label': 'คะแนนแต่ละครั้ง' }, tries.slice(-12).map((t) => h('i', { title: `ครั้งที่ ${t.n}: ${t.score}/${t.total}`, style: `height:${Math.max(6, Math.round((t.score / t.total) * 100))}%` }))),
+          h('ul', { class: 'hist' }, [...tries].reverse().slice(0, 5).map((t) => h('li', {},
+            h('a', { href: `#/result/${s.id}/${t.n}` }, `ครั้งที่ ${t.n}`), h('span', { class: 'muted' }, new Date(t.at).toLocaleDateString('th-TH', { day: 'numeric', month: 'short' })), h('b', {}, `${t.score}/${t.total}`)))),
+          h('div', { class: 'grid two' }, h('a', { class: 'btn', href: `#/result/${s.id}` }, 'ดูเฉลยครั้งล่าสุด'), h('a', { class: 'btn p', href: `#/start/${s.id}` }, 'ทำอีกครั้ง'))));
+      }
+    }
+    view.replaceChildren(...body);
+  }
+
+  /* ---------- ranking in the room (from the teacher's sheet) ---------- */
+  const rankCache = {};
+  async function sheetGet(params) {
+    if (!CFG.SHEET_URL) throw new Error('nosheet');
+    const key = JSON.stringify(params);
+    const c = rankCache[key]; if (c && Date.now() - c.t < 60000) return c.v;
+    const r = await fetch(CFG.SHEET_URL + '?' + new URLSearchParams(params), { redirect: 'follow' });
+    const v = await r.json(); rankCache[key] = { t: Date.now(), v }; return v;
+  }
+  async function pageRank() {
+    const idx = await loadIndex(); const me = profile();
+    const out = h('div', { class: 'stack' });
+    view.replaceChildren(h('h1', {}, 'อันดับในห้อง'), h('p', { class: 'lead' }, 'เทียบคะแนนที่ดีที่สุดของแต่ละคนในห้องเดียวกัน แสดงเฉพาะชื่อเล่นกับคะแนน'), out);
+    if (!me.room) { out.append(h('div', { class: 'card empty' }, h('p', { class: 'big', 'aria-hidden': 'true' }, '🏁'), h('p', {}, 'ใส่รหัสห้องก่อน ถึงจะดูอันดับได้'), h('a', { class: 'btn p', href: '#/profile' }, 'ตั้งรหัสห้อง'))); return; }
+    const mine = idx.sets.filter((s) => (s.reviewed || PREVIEW) && store.get('attempts:' + s.id, []).length);
+    const sets = mine.length ? mine : idx.sets.filter((s) => s.reviewed || PREVIEW);
+    const sel = h('select', { id: 'rk-set', 'aria-label': 'เลือกชุดข้อสอบ' }, sets.map((s) => h('option', { value: s.id }, `${s.subject} · แนว${(idx.schools.find((x) => x.id === s.school) || {}).name || ''} ${s.title}`)));
+    const list = h('div', { class: 'card stack', 'aria-live': 'polite' });
+    out.append(h('p', {}, h('span', { class: 'tag' }, `ห้อง ${me.room}`)), h('label', { class: 'f', for: 'rk-set' }, 'ชุดข้อสอบ', sel), list);
+    async function load() {
+      list.replaceChildren(h('p', { class: 'muted' }, 'กำลังโหลดอันดับ…'));
+      try {
+        const r = await sheetGet({ action: 'rank', room: me.room, set: sel.value });
+        if (!r || r.ok === false) throw new Error('bad');
+        const rows = r.rows || [];
+        if (!rows.length) { list.replaceChildren(h('p', { class: 'muted' }, 'ยังไม่มีใครในห้องนี้ทำชุดนี้ เป็นคนแรกเลยไหม 🙂')); return; }
+        const meIdx = rows.findIndex((x) => String(x.nick).toLowerCase() === me.nick.toLowerCase());
+        const top = rows.slice(0, 10);
+        const items = top.map((x, i) => h('li', { class: 'rk' + (i === meIdx ? ' me' : '') },
+          h('span', { class: 'pos' }, i < 3 ? ['🥇', '🥈', '🥉'][i] : String(i + 1)), h('span', { class: 'nm' }, x.nick + (i === meIdx ? ' (เรา)' : '')),
+          h('span', { class: 'sc' }, `${x.best}/${x.total}`)));
+        if (meIdx >= 10) items.push(h('li', { class: 'rk me' }, h('span', { class: 'pos' }, String(meIdx + 1)), h('span', { class: 'nm' }, rows[meIdx].nick + ' (เรา)'), h('span', { class: 'sc' }, `${rows[meIdx].best}/${rows[meIdx].total}`)));
+        list.replaceChildren(
+          meIdx >= 0 ? h('p', { class: 'cheer' }, `เราอยู่อันดับ ${meIdx + 1} จาก ${rows.length} คน`) : h('p', { class: 'muted' }, `มี ${rows.length} คนทำชุดนี้แล้ว (ยังไม่เห็นชื่อ "${me.nick}" ลองทำชุดนี้ดูนะ)`),
+          h('ol', { class: 'ranklist' }, items));
+      } catch (e) {
+        list.replaceChildren(h('p', { class: 'note' }, e.message === 'nosheet' ? 'ครูยังไม่ได้เชื่อม Google Sheet' : 'ตอนนี้ยังดูอันดับไม่ได้ (ไม่มีเน็ต หรือครูยังไม่ได้อัปเดตสคริปต์) ลองใหม่ภายหลังนะ'));
+      }
+    }
+    sel.addEventListener('change', load); load();
+  }
+
+  /* ---------- me / profile ---------- */
+  async function pageProfile() {
+    const idx = await loadIndex(); const me = profile();
+    const nick = h('input', { type: 'text', id: 'p-nick', maxlength: '20', value: me.nick, autocomplete: 'nickname' });
+    const room = h('input', { type: 'text', id: 'p-room', maxlength: '12', value: me.room, autocomplete: 'off', style: 'text-transform:uppercase' });
+    const status = h('p', { class: 'muted', role: 'status' });
+    const lvl = h('div', { class: 'seg', role: 'radiogroup', 'aria-label': 'ระดับที่สอบ' });
+    let level = LEVELS[me.level] ? me.level : 'm1';
+    const drawLvl = () => lvl.replaceChildren(...Object.entries(LEVELS).map(([k, name]) => h('button', { type: 'button', role: 'radio', class: 'seg-b', 'aria-checked': String(k === level), onclick: () => { level = k; drawLvl(); } }, `สอบเข้า ${name}`)));
+    drawLvl();
+    async function check() {
+      const r = room.value.trim().toUpperCase();
+      if (!r) { status.textContent = 'ไม่ใส่รหัสห้อง = คะแนนอยู่บนเครื่องนี้อย่างเดียว'; return; }
+      if (!CFG.SHEET_URL) { status.textContent = 'ครูยังไม่ได้เชื่อม Google Sheet'; return; }
+      status.textContent = 'กำลังเช็กรหัสห้อง…';
+      try { const v = await sheetGet({ action: 'room', room: r }); status.textContent = v && v.valid ? `✓ รหัสห้อง ${r} ใช้ได้ คะแนนจะส่งให้ครู` : v && v.ok ? `✗ ไม่พบรหัสห้อง ${r} ถามครูอีกทีนะ` : 'เช็กไม่ได้ตอนนี้ (ครูอาจยังไม่ได้อัปเดตสคริปต์) แต่ลองส่งคะแนนได้เหมือนเดิม'; }
+      catch (e) { status.textContent = 'เช็กไม่ได้ตอนนี้ (ไม่มีเน็ต?)'; }
+    }
+    const att = allAttempts(idx);
+    view.replaceChildren(
+      h('h1', {}, 'ฉัน'),
+      h('form', { class: 'card stack', onsubmit: (e) => { e.preventDefault(); saveProfile({ nick: nick.value.trim(), room: room.value.trim().toUpperCase(), level }); status.textContent = '✓ บันทึกแล้ว'; } },
+        h('label', { class: 'f', for: 'p-nick' }, 'ชื่อเล่น', h('small', {}, 'ไม่ต้องใส่ชื่อจริง ชื่อนี้จะโชว์ในอันดับของห้อง'), nick),
+        h('label', { class: 'f', for: 'p-room' }, 'รหัสห้อง', h('small', {}, 'ครูเป็นคนบอก'), room),
+        h('div', { class: 'f' }, h('span', { style: 'font-weight:500' }, 'ระดับที่สอบ'), lvl),
+        status,
+        h('div', { class: 'grid two' }, h('button', { type: 'button', class: 'btn', onclick: check }, 'เช็กรหัสห้อง'), h('button', { type: 'submit', class: 'btn p' }, 'บันทึก'))),
+      h('section', { class: 'card stack' },
+        h('strong', {}, 'ข้อมูลบนเครื่องนี้'),
+        h('p', { class: 'muted' }, `ทำข้อสอบแล้ว ${att.length} ครั้ง · ข้อมูลเก็บในเบราว์เซอร์เครื่องนี้ ถ้าเปลี่ยนเครื่องหรือล้างเบราว์เซอร์ ประวัติจะหาย (แต่ครูยังเห็นคะแนนที่ส่งแล้ว)`),
+        h('button', { type: 'button', class: 'btn', onclick: () => { if (confirm('ลบประวัติคะแนนและโปรไฟล์บนเครื่องนี้ทั้งหมด? (ที่ส่งให้ครูแล้วจะไม่หาย)')) { try { Object.keys(localStorage).filter((k) => k.startsWith('tiw:')).forEach((k) => localStorage.removeItem(k)); } catch (e) {} go('#/'); } } }, 'ลบข้อมูลบนเครื่องนี้')));
+  }
+
+  /* ---------- bottom tabs ---------- */
+  const TABS = [['home', '#/', '🏠', 'หน้าแรก'], ['me', '#/me', '📊', 'คะแนน'], ['rank', '#/rank', '🏆', 'อันดับ'], ['profile', '#/profile', '👤', 'ฉัน']];
+  function drawTabs(active, show) {
+    const nav = document.getElementById('tabs'); if (!nav) return;
+    nav.hidden = !show; document.body.classList.toggle('has-tabs', show);
+    nav.replaceChildren(...TABS.map(([k, href, ico, label]) => h('a', { href, class: 'tab', 'aria-current': k === active ? 'page' : null }, h('span', { 'aria-hidden': 'true' }, ico), h('span', {}, label))));
+  }
+
   /* ---------- router ---------- */
   async function render() {
     clearInterval(ticker);
-    const [, page, id] = (location.hash.replace(/^#\/?/, '').match(/^([a-z]*)\/?([\w-]*)/) || []);
+    const [, page, id, n] = (location.hash.replace(/^#\/?/, '').match(/^([a-z]*)\/?([\w-]*)\/?(\d*)/) || []);
+    const exam = page === 'exam' && !!id;
+    document.body.classList.toggle('in-exam', exam);
     try {
-      if (page === 'start' && id) await pageStart(id);
-      else if (page === 'exam' && id) await pageExam(id);
-      else if (page === 'result' && id) await pageResult(id);
-      else await pageHome();
+      if (page === 'start' && id) { drawTabs('home', true); await pageStart(id); }
+      else if (exam) { drawTabs('home', false); await pageExam(id); }
+      else if (page === 'result' && id) { drawTabs(n ? 'me' : 'home', true); await pageResult(id, n); }
+      else if (page === 'me') { drawTabs('me', true); await pageMe(); }
+      else if (page === 'rank') { drawTabs('rank', true); await pageRank(); }
+      else if (page === 'profile') { drawTabs('profile', true); await pageProfile(); }
+      else { drawTabs('home', true); await pageHome(); }
     } catch (e) {
       view.replaceChildren(h('h1', {}, 'ขอโทษ มีบางอย่างผิดพลาด'), h('p', { class: 'note' }, e.message), h('p', {}, h('a', { href: '#/' }, 'กลับหน้าแรก')));
     }
